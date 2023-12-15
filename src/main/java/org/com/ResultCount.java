@@ -13,7 +13,7 @@ import static org.com.constant.Constant.GENERATED_MESSAGE;
 
 public class ResultCount {
     private static final Logger logger = Logger.getLogger(Main.class.getName());
-    private RandomGen randomGenerator;
+    private IRandomGenerator randomGenerator;
 
     private Map<Integer, Integer> generateResultCounts(int totalIterations) {
         Map<Integer, Integer> resultCounts = new TreeMap<>();
