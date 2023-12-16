@@ -8,7 +8,7 @@ public class Main {
 
         RandomGen generator = new RandomGen(numbers, probabilities);
         ResultCount resultCount = new ResultCount(generator);
-        resultCount.printResultCounts(100);
+        System.out.println(resultCount.printResultCounts(100));
     }
 
 

@@ -1,23 +1,11 @@
 package org.com;
 
-import lombok.Data;
-import org.com.exeption.InvalidInputException;
-
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import static org.com.constant.Constant.INVALID_INPUT_MESSAGE;
+import org.com.exception.InvalidInputException;
 
 
 public record RandomGen(int[] numbers, float[] probabilities) implements IRandomGenerator {
-    private static final Logger logger = Logger.getLogger(RandomGen.class.getName());
+    public static final String INVALID_INPUT_MESSAGE = "Invalid input: lengths of numbers and probabilities must match, and probabilities must be non-negative.";
 
-    private boolean anyNegative(float[] array) {
-        for (double value : array) {
-            return value < 0;
-        }
-        return true;
-    }
 
     @Override
     public int nextNum() {
@@ -34,10 +22,17 @@ public record RandomGen(int[] numbers, float[] probabilities) implements IRandom
         return 0;
     }
 
+
     private void validateInput() {
         if (numbers.length != probabilities.length || anyNegative(probabilities)) {
-            logger.log(Level.SEVERE, INVALID_INPUT_MESSAGE);
             throw new InvalidInputException(INVALID_INPUT_MESSAGE);
         }
+    }
+
+    private boolean anyNegative(float[] array) {
+        for (double value : array) {
+            if (value < 0) return true;
+        }
+        return false;
     }
 }
